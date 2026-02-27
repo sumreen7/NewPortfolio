@@ -9,7 +9,6 @@ interface ChatLandingProps {
 }
 
 const ChatLanding: React.FC<ChatLandingProps> = ({ submitQuery }) => {
-  // Suggested questions that the user can click on
   const suggestedQuestions = [
     {
       icon: <MessageSquare className="h-4 w-4" />,
@@ -33,8 +32,7 @@ const ChatLanding: React.FC<ChatLandingProps> = ({ submitQuery }) => {
     },
   ];
 
-  // Animation variants for staggered animation
-  const containerVariants = {
+  const containerVariants: import('framer-motion').Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -44,14 +42,14 @@ const ChatLanding: React.FC<ChatLandingProps> = ({ submitQuery }) => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: import('framer-motion').Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.4,
-        ease: 'easeInOut', // Updated to use a valid easing function
+        ease: 'easeInOut',
       },
     },
   };
@@ -59,7 +57,7 @@ const ChatLanding: React.FC<ChatLandingProps> = ({ submitQuery }) => {
   const handleSuggestedQuestionClick = (question: { text: string }) => {
     if (!question.text) {
       console.error('Invalid question text:', question);
-      return; // Prevent further execution if the question text is invalid
+      return;
     }
     submitQuery(question.text);
   };
@@ -74,7 +72,7 @@ const ChatLanding: React.FC<ChatLandingProps> = ({ submitQuery }) => {
       {/* Welcome message */}
       <motion.div className="mb-8 text-center" variants={itemVariants}>
         <h2 className="mb-3 text-2xl font-semibold">
-            I'm Sumreen's digital twin
+          I'm Sumreen's digital twin
         </h2>
         <p className="text-muted-foreground mx-auto max-w-md">
           The Ai portfolio that fits YOUR needs.
