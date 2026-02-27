@@ -1,0 +1,198 @@
+Fathima Sumreen
+sumreenf@andrew.cmu.edu | +1-412-708-4876 | LinkedIn | GitHub | Portfolio
+
+Professional Summary
+I'm Sumreen — a software engineer, data scientist, and builder with a product mindset. I've spent 2+ years at Salesforce shipping agentic AI workflows for enterprise-scale systems, and I'm currently at Carnegie Mellon University pursuing my Master's in Information Systems Management (Business Intelligence & Data Analytics). On the side, I'm building Naviyo, an adaptive AI travel assistant that personalizes itineraries in real time.
+
+I sit at the intersection of engineering, AI, and product thinking — I care about building things that actually work and actually matter.
+
+Technical Skills
+AI/ML Technologies: LLMs, Retrieval-Augmented Generation (RAG), Multi-Agent Systems, Prompt Engineering, Fine-tuning, Natural Language Processing (NLP), Transformer Architecture, Hugging Face
+Machine Learning: PyTorch, TensorFlow, Scikit-learn, MLflow, Vector Databases (Pinecone, FAISS)
+Programming Languages: Python, JavaScript, Java, SQL, Shell Scripting
+Cloud & DevOps: Docker, Kubernetes, Azure (Blob Storage, AKS, Cognitive Services), AWS, Airflow, CI/CD
+Data Engineering: Apache Kafka, Spark, PySpark, ETL Pipelines, Neo4j, Redis, PostgreSQL
+Frameworks: FastAPI, React, Flask, Streamlit, Gradio
+
+Professional Experience
+Software Engineer — Salesforce
+Asset Management, Business Technology | Hyderabad, India | Jul 2023 – Aug 2025
+
+- Led requirements definition and rollout of Agentforce-based AI agents to automate onboarding and asset lifecycle workflows used by 40K+ enterprise users
+- Analyzed repetitive asset onboarding failure patterns and designed AI-driven validation rules, reducing onboarding time by 40% while improving reliability
+- Built Salesforce dashboards tracking adoption, processing latency, and error trends; presented insights to leadership to guide feature prioritization
+- Iterated on automation logic post-launch, reducing manual verification effort by 65% without increasing compliance risk
+- Designed agentic AI workflows where LLM-driven agents executed multi-step logic (context retrieval, validation, decisioning, action execution) within Salesforce pipelines
+- Integrated agentic AI with Salesforce workflows, REST APIs, and event triggers, reducing end-to-end asset creation latency by 40%
+- Mentored a junior teammate in building and deploying a Slack-based AI agent for on-call workflows, reducing triage steps and improving incident response time by ~50%
+- Queried and analyzed Salesforce asset lifecycle data using SOQL across large, relational object graphs to identify latency drivers, failure patterns, and reporting gaps at 40K+ user scale
+
+Product Analytics & Insights Intern — SRM Films
+Market Research and Analytics | Hyderabad, India | May 2023 – Jul 2023
+
+- Analyzed audience engagement, drop-off, and churn patterns across digital film content to surface behavioral insights and unmet user needs
+- Queried and processed 500K+ viewer and social interaction records using SQL and Python
+- Built Tableau dashboards to examine content performance, engagement decay, and audience segments
+- Reduced manual reporting effort by 60% through automated analytics workflows
+
+Summer Analyst Intern — Salesforce
+Global Enterprise Operations, Business Technology | Hyderabad, India | May 2022 – Jul 2022
+
+- Developed Slack–MuleSoft automations to optimize Salesforce onboarding workflows
+- Reduced setup time from 3 days to 4 hours and improved new-hire engagement by 75%
+- Strengthened security controls across onboarding integrations
+
+Research Assistant — G. Narayanamma Institute of Technology and Science
+Under Professor Dr. Supriya Vaddi | Hyderabad, India | 2022 – 2023
+
+- Co-authored a published research paper on solar energy prediction using machine learning
+- Handled end-to-end data collection, cleaning, preprocessing, and feature engineering
+- Built and benchmarked multiple ML models, fine-tuned for accuracy
+- Published at ICMLBDA 2023 (Springer) — 15+ citations, 500+ downloads, 10+ academic mentions
+- Paper: "Solar Energy Prediction and Demand Analysis"
+- DOI: 978-3-031-51338-1_57
+- Link: https://link.springer.com/chapter/10.1007/978-3-031-51338-1_57
+
+---
+
+CURRENT PROJECT / STARTUP
+Naviyo – Adaptive AI Travel Partner (Founder & Builder) | Active
+
+Building an AI travel assistant that dynamically adapts itineraries in real time based on who you are and what's happening around you — weather, crowds, preferences, and more.
+
+- Designed a tool-using agentic AI system combining LLM reasoning, NLP sentiment analysis, and real-time signals
+- Built NLP review analyzer for sentiment and safety insights
+- Incorporated behavioral feedback loops to personalize recommendations over time
+- Validated via A/B testing with 200+ users, achieving 82% classification accuracy
+- Applied product thinking end-to-end: user research, competitive analysis, iterative feature development
+
+Key Projects
+NVIDIA x CMU — Social Listening & Market Insights
+- Designed NLP pipelines and evaluation frameworks to benchmark sentiment extraction and topic modeling across 100K+ social media posts
+- Validated model robustness using statistical testing and sensitivity analysis, informing downstream business decisions
+- Conducted large-scale market sentiment analysis to identify audience segments and perception gaps, informing product positioning and messaging strategy
+
+YOMIGO — Product Initiative
+- Identified user pain points and competitive gaps to design an AI travel product
+- Built an NLP review analyzer for sentiment/safety insights
+- Validated feature direction through A/B testing
+
+Job Analyzer — Workforce Intelligence Platform
+- Built an AI-driven system using structured data processing on 17K+ U.S. tech job postings
+- Created automated dashboards identifying 120+ emerging skills
+- Accelerated hiring insights by 60%
+
+Education
+Carnegie Mellon University — Pittsburgh, PA
+Master of Information Systems Management (MISM) - Business Intelligence & Data Analytics
+Sept 2025 – Dec 2026
+Relevant coursework: Data Science for Product Managers, AI Venture Studio, Product Strategy, Software Development Studio, Cloud Computing
+
+G. Narayanamma Institute of Technology and Science — Hyderabad, India
+B.E. - Information Technology | GPA: 9.29/10
+Aug 2019 – May 2023
+Merit Certificate of Excellence: One of top three students to receive a scholarship for academic excellence and extracurricular leadership.
+
+Achievements & Certifications
+- Published research paper at ICMLBDA 2023 (Springer) — "Solar Energy Prediction and Demand Analysis"
+- Merit Certificate of Excellence at GNITS — one of three students to receive scholarship for academic excellence and extracurricular leadership
+- Salesforce Ranger with 82,000+ Trailhead points
+- Accepted into Carnegie Mellon University's MISM program (MBA-equivalent, highly competitive)
+- Reduced enterprise onboarding time by 40% and manual effort by 65% at Salesforce
+
+Contact
+Email: sumreenf@andrew.cmu.edu
+Phone: +1 (412) 708-4876
+LinkedIn: linkedin.com/in/sumreen7
+GitHub: github.com/sumreen7
+Location: Pittsburgh, Pennsylvania, USA
+
+Summary
+
+Top Skills
+Data Platform & Engineering:
+SQL, SOQL, Python, relational data modeling, ETL/ELT pipelines, data validation, semantic layers, data governance, data quality & observability
+
+AI & ML:
+Agentic AI systems, LLM-driven workflows, NLP pipelines, sentiment analysis, A/B testing, model evaluation & benchmarking, production ML deployment
+
+Business Intelligence & Analytics:
+Power BI, Tableau, interactive dashboards, data visualization (Matplotlib, Seaborn), KPI design, data storytelling, demo prototyping, GTM data enrichment
+
+Product & Strategy:
+Product strategy, PRDs, roadmap prioritization, market research, competitive analysis, business case development, change management
+
+Engineering & Collaboration:
+Agile/Scrum, SDLC, Azure DevOps, GitLab, REST APIs, workflow automation, cross-functional collaboration, unit & integration testing, mentorship, CI/CD pipelines
+
+Certifications
+- Salesforce AI Associate
+- Salesforce Advanced Admin
+- Salesforce App Builder
+- Wharton School — AI for Business
+- Salesforce Ranger: 82,000+ points on Trailhead
+
+At Carnegie Mellon University, my focus as a graduate student is on Business Intelligence & Data Analytics — exploring how AI, data systems, and product thinking come together to build things that actually matter.
+Previously at Salesforce, I led the design and rollout of agentic AI workflows for enterprise asset management, where my work reduced onboarding time by 40% and eliminated significant manual effort across pipelines serving 40K+ users. Working at that scale taught me how to think in systems — and how to ship work that holds up under pressure.
+This experience, combined with a published research background in ML and hands-on startup building with Naviyo, drives me to keep pushing at the intersection of engineering, AI, and product — building solutions that are both technically rigorous and genuinely useful.
+
+
+{/* Projects Section */}
+          <section id="projects" className="py-12 scroll-mt-20">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold mb-8 flex items-center text-foreground">
+                Featured Projects
+              </h2>
+            </motion.div>
+            <div className="grid md:grid-cols-2 gap-6">
+              <ProjectCard
+                title="Naviyo – Adaptive AI Travel Partner"
+                date="2024 - Present"
+                description="Built a tool-using agentic AI system that adapts travel itineraries in real time using weather, crowd data, and user preferences. Combines LLM reasoning, NLP sentiment analysis, and rule-based validation. Validated via A/B testing with 200+ users, achieving 82% classification accuracy."
+                tags={["Agentic AI", "LLMs", "NLP", "A/B Testing", "Python", "Real-time Systems"]}
+                image="/images/naviyo.png"
+                projectUrl="https://github.com/sumreen7"
+              />
+
+              <ProjectCard
+                title="NVIDIA x CMU – Social Listening & Market Insights"
+                date="2024"
+                description="Designed NLP pipelines and evaluation frameworks to benchmark sentiment extraction and topic modeling across 100K+ social media posts. Validated model robustness using statistical testing and sensitivity analysis, informing downstream product positioning and business decisions."
+                tags={["NLP", "Sentiment Analysis", "Topic Modeling", "Python", "Statistical Testing"]}
+                image="/images/nvidia-cmu.png"
+                projectUrl="https://github.com/sumreen7"
+              />
+
+              <ProjectCard
+                title="Job Analyzer – Workforce Intelligence Platform"
+                date="2024"
+                description="Built an AI-driven system using structured data processing on 17K+ U.S. tech job postings. Created automated dashboards identifying 120+ emerging skills and accelerated hiring insights by 60%."
+                tags={["Python", "Data Processing", "Dashboards", "AI", "SQL"]}
+                image="/images/job-analyzer.png"
+                projectUrl="https://github.com/sumreen7"
+              />
+
+              <ProjectCard
+                title="YOMIGO – AI Travel Product Initiative"
+                date="2024"
+                description="Identified user pain points and competitive gaps to design an AI travel product. Built an NLP review analyzer for sentiment and safety insights, and validated feature direction through A/B testing."
+                tags={["NLP", "Product Design", "A/B Testing", "Sentiment Analysis", "Python"]}
+                image="/images/yomigo.png"
+                projectUrl="https://github.com/sumreen7"
+              />
+
+              <ProjectCard
+                title="Solar Energy Prediction & Demand Analysis"
+                date="2023"
+                description="Published research at ICMLBDA 2023 (Springer). Developed predictive ML models for solar energy forecasting accounting for meteorological variables, seasonal patterns, and energy consumption trends. Achieved 15+ citations and 500+ downloads."
+                tags={["Machine Learning", "Python", "Predictive Modeling", "Research", "Feature Engineering"]}
+                image="/images/solar.png"
+                projectUrl="https://link.springer.com/chapter/10.1007/978-3-031-51338-1_57"
+              />
+            </div>
+          </section>
