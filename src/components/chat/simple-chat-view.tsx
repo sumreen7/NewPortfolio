@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/chat/chat-bubble';
 import { ChatRequestOptions } from 'ai';
 import { Message } from 'ai/react';
-import { motion } from 'framer-motion';
+import { HTMLMotionProps, motion } from 'framer-motion';
 import ChatMessageContent from './chat-message-content';
 import ToolRenderer from './tool-renderer';
 
@@ -19,7 +19,7 @@ interface SimplifiedChatViewProps {
   addToolResult?: (args: { toolCallId: string; result: string }) => void;
 }
 
-const MOTION_CONFIG = {
+const MOTION_CONFIG: Omit<HTMLMotionProps<'div'>, 'ref'> = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 20 },
@@ -37,7 +37,6 @@ export function SimplifiedChatView({
 }: SimplifiedChatViewProps) {
   if (message.role !== 'assistant') return null;
 
-  // Extract tool invocations that are in "result" state
   const toolInvocations =
     message.parts
       ?.filter(
@@ -50,7 +49,6 @@ export function SimplifiedChatView({
       )
       .filter(Boolean) || [];
 
-  // Only display the first tool (if any)
   const currentTool = toolInvocations.length > 0 ? [toolInvocations[0]] : [];
 
   const hasTextContent = message.content.trim().length > 0;
@@ -60,9 +58,7 @@ export function SimplifiedChatView({
 
   return (
     <motion.div {...MOTION_CONFIG} className="flex h-full w-full flex-col px-4">
-      {/* Single scrollable container for both tool and text content */}
       <div className="custom-scrollbar flex h-full w-full flex-col overflow-y-auto">
-        {/* Tool invocation result - displayed at the top */}
         {hasTools && (
           <div className="mb-6 w-full">
             <ToolRenderer
@@ -72,7 +68,6 @@ export function SimplifiedChatView({
           </div>
         )}
 
-        {/* Text content */}
         {hasTextContent && (
           <div className="w-full">
             <ChatBubble variant="received" className="w-full">
@@ -90,7 +85,6 @@ export function SimplifiedChatView({
           </div>
         )}
 
-        {/* Add some padding at the bottom for better scrolling experience */}
         <div className="pb-6"></div>
       </div>
     </motion.div>
