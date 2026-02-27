@@ -1,12 +1,12 @@
-# Portfolio - Rakshith Dharmappa
+# Portfolio - Fathima Sumreen
 
-A modern, interactive portfolio built with Next.js, featuring an AI-powered chat interface using Groq.
+A modern, interactive portfolio built with Next.js, featuring an AI-powered chat interface using Groq. Ask it anything about my experience, projects, and skills.
 
 ## Features
 
 - 🎨 Modern, responsive design with Tailwind CSS
 - 🤖 AI-powered chat interface using Groq's Llama model
-- 🛠️ Full-stack development with Next.js 15
+- 🛠️ Full-stack development with Next.js 16
 - 📱 Mobile-first responsive design
 - 🌙 Dark/Light theme support
 - ⚡ Fast performance with optimized builds
@@ -14,31 +14,31 @@ A modern, interactive portfolio built with Next.js, featuring an AI-powered chat
 
 ## Tech Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript
+- **Frontend**: Next.js 16, React 19, TypeScript
 - **Styling**: Tailwind CSS 4, Framer Motion
-- **AI**: Groq API with Llama 3.1 70B (primary) and fallback models
+- **AI**: Groq API with Llama 3.3 70B
 - **UI Components**: Radix UI, Lucide React
-- **Deployment**: Vercel (recommended)
+- **Deployment**: Vercel
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- pnpm (recommended) or npm
+- Node.js 18+
+- npm or pnpm
 - Groq API key
 
 ### Installation
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
-cd portfolio
+git clone https://github.com/sumreen7/NewPortfolio.git
+cd NewPortfolio
 ```
 
 2. Install dependencies:
 ```bash
-pnpm install
+npm install
 ```
 
 3. Set up environment variables:
@@ -57,24 +57,20 @@ BRAVE_API_KEY=your_brave_api_key_here
 
 #### Groq API Key
 1. Visit [Groq Console](https://console.groq.com/)
-2. Sign up or log in to your account
-3. Navigate to API Keys section
-4. Create a new API key
-5. Copy the key and add it to your `.env.local` file
+2. Sign up or log in
+3. Navigate to API Keys and create a new key
+4. Add it to your `.env.local` file
 
 #### Brave API Key (for Web Search)
 1. Visit [Brave Search API](https://api.search.brave.com/)
-2. Sign up or log in to your account
-3. Navigate to API Keys section
-4. Create a new API key
-5. Copy the key and add it to your `.env.local` file
+2. Sign up or log in
+3. Navigate to API Keys and create a new key
+4. Add it to your `.env.local` file
 
 ### Development
 
-Run the development server:
-
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
@@ -82,45 +78,35 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 ### Building for Production
 
 ```bash
-pnpm build
-pnpm start
+npm run build
+npm start
 ```
 
 ## Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `GROQ_API_KEY` | Your Groq API key for AI chat functionality | Yes |
-| `GITHUB_TOKEN` | GitHub token for fetching repository stars | No |
-| `BRAVE_API_KEY` | Brave Search API key for web search functionality | No |
+| `GROQ_API_KEY` | Groq API key for AI chat | Yes |
+| `GITHUB_TOKEN` | GitHub token for repo stars | No |
+| `BRAVE_API_KEY` | Brave Search API for web search | No |
 
 ## AI Chat Features
 
 The portfolio includes an AI-powered chat interface that can:
 
-- Provide information about projects and skills
-- Share contact details and resume
-- Answer questions about background and experience
-- Show sports photos and achievements
-- Handle internship inquiries
-- Share personal anecdotes and experiences
-- **Search the web for current events and recent information**
+- Introduce me and share my background
+- Talk about my experience at Salesforce and CMU
+- Describe my projects (NVIDIA x CMU, YOMIGO, Job Analyzer)
+- Share my skills and certifications
+- Answer questions about my hobbies (tennis, trekking, @coffeennovels)
+- Provide contact information and resume
+- Search the web for current information
 
 ### Rate Limiting
 
-The chat API includes built-in rate limiting:
-- 10 requests per minute per IP address
+- 10 requests per minute per IP
 - Automatic retry logic for transient errors
 - Graceful error handling for API failures
-
-### Model Configuration
-
-The system uses a tiered model approach for optimal performance:
-- **Primary**: Llama 3.1 70B (8192 context) - Best tool calling capabilities
-- **Fallback 1**: Llama 3.1 8B (8192 context) - Fast response times
-- **Fallback 2**: Mixtral 8x7B (32768 context) - Large context window
-
-The system automatically falls back to the next model if the primary model fails.
 
 ## Project Structure
 
@@ -128,7 +114,7 @@ The system automatically falls back to the next model if the primary model fails
 src/
 ├── app/                    # Next.js app directory
 │   ├── api/               # API routes
-│   │   ├── chat/          # AI chat endpoint
+│   │   ├── chat/          # AI chat endpoint + tools
 │   │   └── github-stars/  # GitHub stars endpoint
 │   ├── chat/              # Chat page
 │   └── globals.css        # Global styles
@@ -146,41 +132,8 @@ src/
 1. Push your code to GitHub
 2. Connect your repository to Vercel
 3. Add environment variables in Vercel dashboard
-4. Deploy automatically on push
-
-### Other Platforms
-
-The app can be deployed to any platform that supports Next.js:
-- Netlify
-- Railway
-- DigitalOcean App Platform
-- AWS Amplify
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+4. Deploy automatically on every push
 
 ## License
 
 This project is licensed under the MIT License.
-
-## Support
-
-If you encounter any issues:
-
-1. Check the console for error messages
-2. Verify your environment variables are set correctly
-3. Ensure your Groq API key is valid and has sufficient credits
-4. Check the network tab for API request failures
-
-## Performance Optimizations
-
-- Lazy loading of components
-- Optimized images with Next.js Image component
-- Efficient AI model selection (Llama 3.1 8B Instant)
-- Rate limiting to prevent abuse
-- Error boundaries for graceful failure handling
