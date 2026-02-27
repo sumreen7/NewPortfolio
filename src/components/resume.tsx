@@ -2,11 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDownToLine, Download, Eye, File } from 'lucide-react';
-import Image from 'next/image';
+import { Download } from 'lucide-react';
 
 export function Resume() {
-  // Resume details
   const resumeDetails = {
     title: "Sumreen's Resume",
     description: 'Building at the intersection of AI & product • Currently @ Carnegie Mellon',
@@ -18,7 +16,6 @@ export function Resume() {
   };
 
   const handleDownload = () => {
-    // Open Google Drive link in new tab
     window.open(resumeDetails.downloadUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -29,10 +26,9 @@ export function Resume() {
         className="group relative cursor-pointer overflow-hidden rounded-xl bg-accent p-0 transition-all duration-300"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.0, ease: 'easeOut' }}
+        transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
         whileHover={{ scale: 1.01 }}
       >
-        {/* Details area (bottom part) */}
         <div className="p-5">
           <div className="flex items-center justify-between">
             <div>
@@ -51,7 +47,6 @@ export function Resume() {
               </div>
             </div>
 
-            {/* Download indicator */}
             <motion.div
               className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-primary-foreground group-hover:bg-black/80"
               initial={{ scale: 1 }}

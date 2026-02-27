@@ -1,46 +1,332 @@
 'use client';
 
-import { Suspense } from 'react';
-import { motion } from 'framer-motion';
-import { Loader2 } from 'lucide-react';
-import Chat from '@/components/chat/chat';
+import FluidCursor from '@/components/FluidCursor';
+import { Button } from '@/components/ui/button';
 
-// Loading component with smooth animation
-const ChatLoading = () => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-neutral-900 dark:to-neutral-800"
-  >
-    <motion.div
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="flex flex-col items-center gap-4 rounded-2xl bg-white/80 p-8 shadow-2xl backdrop-blur-md dark:bg-neutral-900/80"
-    >
-      <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
-      <div className="text-center">
-        <h2 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-          Loading Chat Interface
-        </h2>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Preparing your conversation with Sumreen...
-        </p>
-      </div>
-    </motion.div>
-  </motion.div>
-);
+import WelcomeModal from '@/components/welcome-modal';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import {
+  ArrowRight,
+  Laugh,
+  Layers,
+  PartyPopper,
+  Loader2,
+  X,
+  Code,
+  GraduationCap,
+  Mail,
+} from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 
-export default function Page() {
+const ChatComponent = dynamic(() => import('@/components/chat/chat'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-96">
+      <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+    </div>
+  ),
+});
+
+const questions = {
+  'About Me': 'Who are you? I want to know more about you.',
+  Experience: 'What is your work experience? Tell me about your professional background.',
+  Projects: 'What are your projects? What are you working on right now?',
+  Achievements: 'What are your achievements and accomplishments?',
+  Skills: 'What are your skills? Give me a list of your soft and hard skills.',
+  Contact: 'How can I contact you?',
+} as const;
+
+const questionConfig = [
+  { key: 'About Me', color: '#329696', icon: Laugh },
+  { key: 'Experience', color: '#B95F9D', icon: GraduationCap },
+  { key: 'Projects', color: '#3E9858', icon: Code },
+  { key: 'Achievements', color: '#FF6B35', icon: PartyPopper },
+  { key: 'Skills', color: '#856ED9', icon: Layers },
+  { key: 'Contact', color: '#C19433', icon: Mail },
+] as const;
+
+const TITLES = [
+  'GenAI Developer',
+  'Data Scientist',
+  'Product Thinker',
+  'ML Engineer'
+];
+
+const memojiImages = [
+  '/landingpage2.png',
+  '/landingpage4.png',
+  '/landingpage1.png',
+  '/landingpage3.png'
+];
+
+const memojiSizes = [
+  { width: 325, height: 325 },
+  { width: 500, height: 500 },
+  { width: 350, height: 350 },
+  { width: 400, height: 400 },
+];
+
+export default function Home() {
+  const [input, setInput] = useState('');
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [initialQuery, setInitialQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [currentTitle, setCurrentTitle] = useState(0);
+
+  const openChat = async (query: string) => {
+    setInitialQuery(query);
+    setIsChatOpen(true);
+  };
+
+  const topElementVariants: Variants = {
+    hidden: { opacity: 0, y: -60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'tween', ease: 'easeOut', duration: 0.8 },
+    },
+  };
+
+  const bottomElementVariants: Variants = {
+    hidden: { opacity: 0, y: 80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'tween', ease: 'easeOut', duration: 0.8, delay: 0.2 },
+    },
+  };
+
+  const pageTransitionVariants: Variants = {
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 1.05 },
+  };
+
+  useEffect(() => {
+    const titleInterval = setInterval(() => {
+      setCurrentTitle((prev) => (prev + 1) % TITLES.length);
+    }, 3000);
+
+    return () => clearInterval(titleInterval);
+  }, []);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = '/landing_memojis.png';
+
+    const gifImg = new window.Image();
+    gifImg.src = '/EmojiMovie774657265.gif';
+  }, []);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20"
+      variants={pageTransitionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.3, ease: [0.19, 1, 0.22, 1] }}
     >
-      <Suspense fallback={<ChatLoading />}>
-        <Chat />
-      </Suspense>
+      {/* big blurred footer word */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
+        <div
+          className="hidden bg-gradient-to-b from-muted-foreground/10 to-muted-foreground/0 bg-clip-text text-[10rem] leading-none font-black text-transparent select-none sm:block lg:text-[16rem]"
+          style={{ marginBottom: '-2.5rem' }}
+        >
+          Sumreen
+        </div>
+      </div>
+
+      <div className="absolute top-6 left-6 z-20">
+        <button
+          onClick={() => {
+            const subject = encodeURIComponent('Let\'s connect!');
+            const body = encodeURIComponent("Hi Sumreen,\n\nI came across your portfolio and would love to connect.\n\nBest,");
+            window.location.href = `mailto:sumreenf@andrew.cmu.edu?subject=${subject}&body=${body}`;
+          }}
+          className="relative flex cursor-pointer items-center gap-2 rounded-full border bg-background/30 px-4 py-1.5 text-sm font-medium text-foreground shadow-md backdrop-blur-lg transition hover:bg-background/60"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+          </span>
+          Interested to talk more?
+        </button>
+      </div>
+
+      {/* header */}
+      <motion.div
+        className="z-1 mt-24 mb-0 flex flex-col items-center text-center md:mt-4 md:mb-0"
+        variants={topElementVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="z-100">
+          <WelcomeModal />
+        </div>
+
+        <h2 className="text-secondary-foreground mt-1 text-xl font-semibold md:text-2xl">
+          Hey, I'm Sumreen 👋
+        </h2>
+        <div style={{ minHeight: 60 }}>
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={TITLES[currentTitle]}
+              className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              {TITLES[currentTitle]}
+            </motion.h1>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* centre memoji */}
+      <motion.div
+        className="relative z-10 mt-0 mb-0 flex justify-center"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.2 }}
+      >
+        <AnimatePresence mode="wait">
+          {currentTitle === 0 && (
+            <motion.div
+              key="memoji-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="relative -top-20 -mb-29.5"
+            >
+              <Image src="/landingpage2.png" alt="GenAI Developer" width={449} height={449} priority className="h-[449px] w-[449px] object-contain" />
+            </motion.div>
+          )}
+          {currentTitle === 1 && (
+            <motion.div
+              key="memoji-1"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="relative -top-20 -mb-29.5"
+            >
+              <Image src="/landingpage4.png" alt="Data Scientist" width={449} height={449} priority className="h-[449px] w-[449px] object-contain" />
+            </motion.div>
+          )}
+          {currentTitle === 2 && (
+            <motion.div
+              key="memoji-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="relative top-0 mb-4"
+            >
+              <Image src="/landingpage1.png" alt="Product Thinker" width={315} height={315} priority className="h-[315px] w-[315px] object-contain" />
+            </motion.div>
+          )}
+          {currentTitle === 3 && (
+            <motion.div
+              key="memoji-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="relative -top-20 -mb-36"
+            >
+              <Image src="/landingpage3.png" alt="ML Engineer" width={475} height={475} priority className="h-[475px] w-[475px] object-contain" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* input + quick buttons */}
+      <motion.div
+        variants={bottomElementVariants}
+        initial="hidden"
+        animate="visible"
+        className="z-10 mt-4 flex w-full flex-col items-center justify-center md:px-0"
+      >
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (input.trim()) {
+              await openChat(input.trim());
+            }
+          }}
+          className="relative w-full max-w-2xl"
+        >
+          <div className="mx-auto flex items-center rounded-full border border-border bg-background/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-border/60">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask me anything…"
+              className="w-full border-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={!input.trim()}
+              aria-label="Submit question"
+              className="flex items-center justify-center rounded-full bg-[#0171E3] p-2.5 text-white transition-colors hover:bg-blue-600 disabled:opacity-70 dark:bg-blue-600 dark:hover:bg-blue-700"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-6 grid w-full max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3">
+          {questionConfig.map(({ key, color, icon: Icon }) => (
+            <motion.div
+              key={key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.1 }}
+            >
+              <Button
+                onClick={() => openChat(questions[key])}
+                variant="outline"
+                className="border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-background/30 py-6 shadow-none backdrop-blur-lg transition-all duration-200 hover:shadow-lg md:py-8"
+              >
+                <div className="flex h-full flex-col items-center justify-center gap-2 text-muted-foreground">
+                  <Icon size={24} strokeWidth={2} color={color} />
+                  <span className="text-sm font-medium">{key}</span>
+                </div>
+              </Button>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Chat Overlay */}
+      <AnimatePresence mode="wait">
+        {isChatOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: '100%', scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: '100%', scale: 0.95 }}
+            transition={{
+              type: 'spring',
+              damping: 30,
+              stiffness: 300,
+              duration: 0.6,
+            }}
+            className="fixed inset-0 z-50 bg-background"
+          >
+            <div className="relative h-full w-full">
+              <ChatComponent initialQuery={initialQuery} onClose={() => setIsChatOpen(false)} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <FluidCursor />
     </motion.div>
   );
 }

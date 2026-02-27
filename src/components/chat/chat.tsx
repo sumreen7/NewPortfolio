@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
-// Lazy load components
 const ChatBottombar = dynamic(() => import('@/components/chat/chat-bottombar'));
 const ChatLanding = dynamic(() => import('@/components/chat/chat-landing'));
 const ChatMessageContent = dynamic(() => import('@/components/chat/chat-message-content'));
@@ -19,16 +18,14 @@ import {
   ChatBubbleMessage,
 } from '@/components/ui/chat/chat-bubble';
 import { ArrowLeft, X } from 'lucide-react';
-import { GithubButton } from '../ui/github-button';
 
-// Constants
 const MOTION_CONFIG = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 20 },
   transition: {
     duration: 0.3,
-    ease: 'easeOut',
+    ease: [0.19, 1, 0.22, 1] as [number, number, number, number],
   },
 } as const;
 
@@ -37,7 +34,6 @@ const HEADER_HEIGHTS = {
   withTool: 100,
 } as const;
 
-// Types
 interface AvatarProps {
   hasActiveTool: boolean;
   isTalking: boolean;
@@ -49,7 +45,6 @@ interface ChatState {
   isTalking: boolean;
 }
 
-// Client-side only hook for iOS detection
 const useIsIOSDevice = () => {
   const [isIOS, setIsIOS] = useState(false);
   
@@ -69,7 +64,6 @@ const useIsIOSDevice = () => {
   return isIOS;
 };
 
-// Avatar component with optimized iOS detection
 const Avatar = dynamic<AvatarProps>(
   () =>
     Promise.resolve(({ hasActiveTool, isTalking }: AvatarProps) => {
@@ -117,7 +111,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
   const queryFromParams = searchParams.get('query');
   const finalInitialQuery = initialQuery || queryFromParams;
   
-  // Consolidated state
   const [chatState, setChatState] = useState<ChatState>({
     autoSubmitted: false,
     loadingSubmit: false,
@@ -149,7 +142,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
       setChatState(prev => ({ ...prev, loadingSubmit: false, isTalking: false }));
       console.error('Chat error:', error);
       
-      // Enhanced error handling for different error types
       let errorMessage = 'An unexpected error occurred. Please try again.';
       
       if (error.message.includes('rate limit')) {
@@ -170,7 +162,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
     }, []),
   });
 
-  // Memoized calculations
   const { currentAIMessage, latestUserMessage, hasActiveTool, isToolInProgress } = useMemo(() => {
     const latestAIIndex = messages.findLastIndex(m => m.role === 'assistant');
     const latestUserIndex = messages.findLastIndex(m => m.role === 'user');
@@ -178,7 +169,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
     let currentAI = latestAIIndex !== -1 ? messages[latestAIIndex] : null;
     const latestUser = latestUserIndex !== -1 ? messages[latestUserIndex] : null;
     
-    // Check if AI message is outdated
     if (latestAIIndex < latestUserIndex) {
       currentAI = null;
     }
@@ -206,7 +196,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
   const isEmptyState = !currentAIMessage && !latestUserMessage && !chatState.loadingSubmit;
   const headerHeight = hasActiveTool ? HEADER_HEIGHTS.withTool : HEADER_HEIGHTS.default;
 
-  // Callbacks
   const submitQuery = useCallback((query: string) => {
     if (!query.trim() || isToolInProgress) return;
     setChatState(prev => ({ ...prev, loadingSubmit: true }));
@@ -225,12 +214,10 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
     setChatState(prev => ({ ...prev, loadingSubmit: false, isTalking: false }));
   }, [stop]);
 
-  // Effects
   useEffect(() => {
     if (finalInitialQuery && !chatState.autoSubmitted) {
       setChatState(prev => ({ ...prev, autoSubmitted: true }));
       submitQuery(finalInitialQuery);
-      // Clear the input after submitting the initial query
       setTimeout(() => setInput(''), 100);
     }
   }, [finalInitialQuery, chatState.autoSubmitted, setInput, submitQuery]);
@@ -242,22 +229,22 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
       className="relative h-screen overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
     >
       {/* Header Controls */}
       <motion.div 
         className="absolute top-6 left-6 z-51"
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.19, 1, 0.22, 1] }}
       >
-      <button
-        onClick={() => window.history.length > 1 ? window.history.back() : window.location.href = '/'}
-        className="flex items-center gap-2 rounded-full border bg-background/30 px-4 py-2 text-sm font-medium text-foreground shadow-md backdrop-blur-lg transition hover:bg-background/60"
->
-        <ArrowLeft className="h-4 w-4" />
-        Back
-      </button>
+        <button
+          onClick={() => window.history.length > 1 ? window.history.back() : window.location.href = '/'}
+          className="flex items-center gap-2 rounded-full border bg-background/30 px-4 py-2 text-sm font-medium text-foreground shadow-md backdrop-blur-lg transition hover:bg-background/60"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back
+        </button>
       </motion.div>
 
       {/* Close button */}
@@ -265,7 +252,7 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
         className="absolute top-6 right-6 z-51"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.19, 1, 0.22, 1] }}
       >
         <button
           onClick={onClose}
@@ -276,8 +263,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
         </button>
       </motion.div>
 
-
-
       {/* Fixed Avatar Header */}
       <motion.div
         className="fixed top-0 right-0 left-0 z-50"
@@ -287,14 +272,14 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
         }}
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.5, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
       >
         <div className={`transition-all duration-300 ease-in-out ${hasActiveTool ? 'pt-6 pb-0' : 'py-6'}`}>
           <motion.div 
             className="flex justify-center"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.4, delay: 0.4, ease: [0.19, 1, 0.22, 1] }}
           >
             <Avatar
               hasActiveTool={hasActiveTool}
@@ -321,7 +306,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
               </motion.div>
             ) : (
               <div className="pb-6 space-y-6">
-                {/* Show user message */}
                 {latestUserMessage && (
                   <motion.div {...MOTION_CONFIG} className="flex justify-end">
                     <div className="max-w-[80%] px-4">
@@ -339,7 +323,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
                   </motion.div>
                 )}
                 
-                {/* Show AI message */}
                 {currentAIMessage && (
                   <SimplifiedChatView
                     message={currentAIMessage}
@@ -349,7 +332,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
                   />
                 )}
                 
-                {/* Show loading state */}
                 {chatState.loadingSubmit && !currentAIMessage && (
                   <motion.div {...MOTION_CONFIG} className="px-4">
                     <ChatBubble variant="received">
@@ -376,8 +358,6 @@ const Chat = ({ initialQuery, onClose }: ChatProps) => {
             />
           </div>
         </div>
-        
-
       </div>
     </motion.div>
   );

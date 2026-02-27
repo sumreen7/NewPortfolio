@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import React, { useState } from 'react';
 
 export function Presentation() {
@@ -24,12 +24,12 @@ export function Presentation() {
     '🍜 Foodie',
   ];
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
-  const paragraphAnimation = {
+  const paragraphAnimation: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut', delay: 0.2 } },
   };
@@ -37,7 +37,6 @@ export function Presentation() {
   return (
     <div className="mx-auto w-full max-w-5xl py-6 font-sans">
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-        {/* Image section */}
         <div className="relative mx-auto aspect-square w-full max-w-sm">
           <div className="relative h-full w-full overflow-hidden rounded-2xl">
             <motion.div
@@ -46,7 +45,6 @@ export function Presentation() {
               transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
               className="h-full w-full"
             >
-              {/* Using plain img instead of Next.js Image to avoid strict src validation */}
               <img
                 src={imgError ? 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3' : profile.src}
                 alt={profile.name}
@@ -57,7 +55,6 @@ export function Presentation() {
           </div>
         </div>
 
-        {/* Text content section */}
         <div className="flex flex-col space-y">
           <motion.div initial="hidden" animate="visible" variants={textVariants}>
             <h1 className="from-foreground to-muted-foreground bg-gradient-to-r bg-clip-text text-xl font-semibold text-transparent md:text-3xl">
@@ -78,7 +75,6 @@ export function Presentation() {
             {profile.description}
           </motion.p>
 
-          {/* Tags */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -23,7 +23,6 @@ import {
   Package,
   PartyPopper,
   Sparkles,
-  UserRoundSearch,
   UserSearch,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -53,7 +52,6 @@ const questionConfig = [
   { key: 'Contact', color: '#C19433', icon: MailIcon },
 ];
 
-// Helper drawer data
 const specialQuestions = [
   'Mountain Bike you said?? Show me!',
   'Who are you?',
@@ -74,7 +72,7 @@ const questionsByCategory = [
       'What are your passions?',
       'How did you get started in tech?',
       'Where do you see yourself in 5 years?',
-    ].filter(Boolean), // Ensure all questions are valid strings
+    ].filter(Boolean),
   },
   {
     id: 'professional',
@@ -126,16 +124,13 @@ const questionsByCategory = [
   },
 ];
 
-// Animated Chevron component
 const AnimatedChevron = () => {
   return (
     <motion.div
-      animate={{
-        y: [0, -4, 0], // Subtle up and down motion
-      }}
+      animate={{ y: [0, -4, 0] }}
       transition={{
         duration: 1.5,
-        ease: 'easeInOut',
+        ease: [0.42, 0, 0.58, 1],
         repeat: Infinity,
         repeatType: 'loop',
       }}
@@ -156,12 +151,11 @@ export default function HelperBoost({
   const handleQuestionClick = (questionKey: string) => {
     if (!questions[questionKey as keyof typeof questions]) {
       console.error(`Invalid question key: ${questionKey}`);
-      return; // Prevent further execution if the question key is invalid
+      return;
     }
 
     if (submitQuery) {
       submitQuery(questions[questionKey as keyof typeof questions]);
-      // Clear the input after submitting
       if (setInput) {
         setTimeout(() => setInput(''), 100);
       }
@@ -171,7 +165,6 @@ export default function HelperBoost({
   const handleDrawerQuestionClick = (question: string) => {
     if (submitQuery) {
       submitQuery(question);
-      // Clear the input after submitting
       if (setInput) {
         setTimeout(() => setInput(''), 100);
       }
@@ -187,7 +180,6 @@ export default function HelperBoost({
     <>
       <Drawer.Root open={open} onOpenChange={setOpen}>
         <div className="w-full">
-          {/* Toggle Button */}
           <div
             className={
               isVisible
@@ -213,7 +205,6 @@ export default function HelperBoost({
             </button>
           </div>
 
-          {/* HelperBoost Content */}
           {isVisible && (
             <div className="w-full">
               <div className="flex w-full gap-2 overflow-x-auto pb-2">
@@ -231,7 +222,6 @@ export default function HelperBoost({
                   </Button>
                 ))}
 
-                {/* Need Inspiration Button */}
                 <TooltipProvider>
                   <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild>
@@ -244,10 +234,8 @@ export default function HelperBoost({
                           <div className="flex items-center gap-3 text-muted-foreground">
                             <CircleEllipsis
                               className="h-[20px] w-[18px]"
-                              //style={{ color: '#3B82F6' }}
                               strokeWidth={2}
                             />
-                            {/*<span className="text-sm font-medium">More</span>*/}
                           </div>
                         </motion.div>
                       </Drawer.Trigger>
@@ -262,7 +250,6 @@ export default function HelperBoost({
           )}
         </div>
 
-        {/* Drawer Content */}
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-100 bg-black/60 backdrop-blur-xs" />
           <Drawer.Content className="fixed right-0 bottom-0 left-0 z-100 mt-24 flex h-[80%] flex-col rounded-t-[10px] bg-background outline-none lg:h-[60%]">
@@ -294,7 +281,6 @@ export default function HelperBoost({
   );
 }
 
-// Component for each category section
 interface CategorySectionProps {
   name: string;
   Icon: React.ElementType;
@@ -333,7 +319,6 @@ function CategorySection({
   );
 }
 
-// Component for each question item with animated chevron
 interface QuestionItemProps {
   question: string;
   onClick: () => void;
@@ -345,7 +330,7 @@ function QuestionItem({ question, onClick, isSpecial }: QuestionItemProps) {
 
   if (!question || typeof question !== 'string') {
     console.error('Invalid question:', question);
-    return null; // Prevent rendering if question is invalid
+    return null;
   }
 
   return (

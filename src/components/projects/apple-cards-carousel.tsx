@@ -59,14 +59,10 @@ export const Carousel = ({
     }
   };
 
-  // Get the card width and gap based on viewport size
   const getScrollDistance = () => {
-    // Card width (w-56 = 224px) + gap-4 (16px)
     const cardWidth = 224;
     const gap = 16;
     const totalWidth = cardWidth + gap;
-
-    // Scroll by 2 cards on desktop, 1 on mobile
     const cardsToScroll = 1;
     return totalWidth * cardsToScroll;
   };
@@ -91,8 +87,8 @@ export const Carousel = ({
 
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = 224; // w-56 (224px)
-      const gap = isMobile() ? 16 : 16; // gap-4 (16px)
+      const cardWidth = 224;
+      const gap = 16;
       const scrollPosition = (cardWidth + gap) * index;
       carouselRef.current.scrollTo({
         left: scrollPosition,
@@ -100,10 +96,6 @@ export const Carousel = ({
       });
       setCurrentIndex(index);
     }
-  };
-
-  const isMobile = () => {
-    return window && window.innerWidth < 768;
   };
 
   return (
@@ -125,24 +117,17 @@ export const Carousel = ({
           <div
             className={cn(
               'flex flex-row justify-start gap-4',
-              'mx-auto max-w-7xl' // remove max-w-4xl if you want the carousel to span the full width of its container
+              'mx-auto max-w-7xl'
             )}
           >
             {items.map((item, index) => (
               <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    duration: 0.5,
-                    delay: 0.2 * index,
-                    ease: 'easeOut',
-                    once: true,
-                  },
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2 * index,
+                  ease: [0.19, 1, 0.22, 1],
                 }}
                 key={'card' + index}
                 className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
@@ -203,7 +188,7 @@ export const Card = ({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
-  //@ts-ignore
+  // @ts-ignore
   useOutsideClick(containerRef, () => handleClose());
 
   const handleOpen = () => {
@@ -234,7 +219,6 @@ export const Card = ({
               layoutId={layout ? `card-${card.title}` : undefined}
               className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white font-sans dark:bg-neutral-900"
             >
-              {/* Sticky close button */}
               <div className="sticky top-4 z-52 flex justify-end px-8 pt-8 md:px-14 md:pt-8">
                 <button
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-black/90 shadow-md dark:bg-white/90"
@@ -244,7 +228,6 @@ export const Card = ({
                 </button>
               </div>
 
-              {/* Header section with consistent padding */}
               <div className="relative px-8 pt-2 pb-0 md:px-14">
                 <div>
                   <motion.p
@@ -262,7 +245,6 @@ export const Card = ({
                 </div>
               </div>
 
-              {/* Content with consistent padding */}
               <div className="px-8 pt-8 pb-14 md:px-14">{card.content}</div>
             </motion.div>
           </div>
@@ -273,7 +255,6 @@ export const Card = ({
         onClick={handleOpen}
         className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-100 hover:from-blue-100 hover:to-indigo-200 dark:from-neutral-800 dark:to-neutral-700 dark:hover:from-neutral-700 dark:hover:to-neutral-600 transition-all duration-300 hover:scale-105"
       >
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src={card.src}
@@ -282,20 +263,14 @@ export const Card = ({
             className="object-cover"
             sizes="(max-width: 768px) 224px, 224px"
             onError={(e) => {
-              // Fallback to gradient background if image fails to load
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
             }}
           />
         </div>
-        
-        {/* Gradient overlay for better text readability */}
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        {/* Remove category and title for clean logo display */}
         <div className="relative z-40 p-8"></div>
       </motion.button>
     </>
   );
 };
-
-
