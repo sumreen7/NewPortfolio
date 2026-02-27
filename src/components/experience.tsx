@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, FlaskConical, Rocket, Cloud, BookOpen, BarChart } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, FlaskConical } from 'lucide-react';
 import Image from 'next/image';
 
 const Experience = () => {
@@ -108,21 +108,21 @@ const Experience = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: import('framer-motion').Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeInOut' },
+      transition: { duration: 0.6, ease: 'easeInOut' as const },
     },
   };
 
-  const badgeVariants = {
+  const badgeVariants: import('framer-motion').Variants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.3, ease: 'easeInOut' },
+      transition: { duration: 0.3, ease: 'easeInOut' as const },
     },
   };
 
@@ -153,20 +153,16 @@ const Experience = () => {
                 className="space-y-4 px-0"
                 variants={itemVariants}
               >
-                {/* Experience Header */}
                 <div className="flex items-start gap-4">
                   <div className={`flex h-12 w-12 items-center justify-center rounded-lg text-2xl ${experience.color} overflow-hidden`}>
-                    {experience.logo ? (
+                    {experience.logo && (
                       <Image
                         src={experience.logo}
                         alt={`${experience.company} logo`}
                         width={40}
                         height={40}
                         className="object-contain w-full h-full"
-                        objectFit="contain"
                       />
-                    ) : (
-                      experience.icon
                     )}
                   </div>
                   <div className="flex-1">
@@ -195,12 +191,10 @@ const Experience = () => {
                   </div>
                 </div>
 
-                {/* Description */}
                 <p className="text-muted-foreground text-base leading-relaxed">
                   {experience.description}
                 </p>
 
-                {/* Publication link for research */}
                 {'publication' in experience && experience.publication && (
                   <a
                     href={experience.publication.link}
@@ -213,7 +207,6 @@ const Experience = () => {
                   </a>
                 )}
 
-                {/* Achievements */}
                 <div className="space-y-2">
                   <h4 className="text-accent-foreground text-sm font-semibold uppercase tracking-wide">
                     Key Achievements
@@ -228,7 +221,6 @@ const Experience = () => {
                   </ul>
                 </div>
 
-                {/* Technologies */}
                 <div className="space-y-2">
                   <h4 className="text-accent-foreground text-sm font-semibold uppercase tracking-wide">
                     Technologies & Skills
