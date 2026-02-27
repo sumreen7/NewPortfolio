@@ -89,12 +89,12 @@ export default function Home() {
   };
 
   /* hero animations (unchanged) */
-  const topElementVariants = {
+  const topElementVariants: import("framer-motion").Variants = {
     hidden: { opacity: 0, y: -60 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'ease', duration: 0.8 },
+      transition: { duration: 0.8 },
     },
   };
   const bottomElementVariants = {
