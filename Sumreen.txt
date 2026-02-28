@@ -177,14 +177,14 @@ This experience, combined with a published research background in ML and hands-o
                 projectUrl="https://github.com/sumreen7"
               />
 
-              <ProjectCard
-                title="YOMIGO – AI Travel Product Initiative"
-                date="2024"
-                description="Identified user pain points and competitive gaps to design an AI travel product. Built an NLP review analyzer for sentiment and safety insights, and validated feature direction through A/B testing."
-                tags={["NLP", "Product Design", "A/B Testing", "Sentiment Analysis", "Python"]}
-                image="/images/yomigo.png"
-                projectUrl="https://github.com/sumreen7"
-              />
+              <<ProjectCard
+  title="VSP Vision – Frame Assortment Intelligence"
+  date="2025"
+  description="Built an end-to-end demand forecasting and assortment optimization pipeline for Visionworks eyewear retail (162 SKUs, 3 brands, 2 regions, 910K+ units). Engineered 33 leakage-free time-series features and trained a tuned XGBoost model (R² = 0.737 log-scale). Identified price-tier inefficiencies, regional assortment gaps, and white-space opportunities (Oval, Titanium, Cat Eye), translating predictions into 14 prioritized product action items."
+  tags={["XGBoost", "Time-Series Forecasting", "Product Analytics", "Python", "Machine Learning", "Business Intelligence"]}
+  image="/images/vsp.png"
+  projectUrl="https://github.com/sumreen7/vsp-frame-assortment"
+/>
 
               <ProjectCard
                 title="Solar Energy Prediction & Demand Analysis"
