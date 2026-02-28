@@ -11,6 +11,7 @@ import RCB from '../rcb';
 import Resume from '../resume';
 import Skills from '../skills';
 import Sports from '../sport';
+import Achievements from '../achievements';
 import {
   Collapsible,
   CollapsibleContent,
@@ -45,7 +46,7 @@ const WebSearchResult = ({ result }: { result: string }) => {
           )}
         </div>
       </CollapsibleTrigger>
-      
+
       <CollapsibleContent>
         <div className="border-t bg-background/50 p-4">
           <div className="prose dark:prose-invert max-w-none text-sm">
@@ -86,34 +87,24 @@ export default function ToolRenderer({
           console.error(`Error parsing tool result for ${toolName}:`, error);
         }
 
-        // Return specialized components based on tool name
         switch (toolName) {
           case 'getProjects':
             return (
-              <div
-                key={toolCallId}
-                className="w-full overflow-hidden rounded-lg p-2"
-              >
+              <div key={toolCallId} className="w-full overflow-hidden rounded-lg p-2">
                 <AllProjects />
               </div>
             );
 
           case 'getProducts':
             return (
-              <div
-                key={toolCallId}
-                className="w-full overflow-hidden rounded-lg p-2"
-              >
+              <div key={toolCallId} className="w-full overflow-hidden rounded-lg p-2">
                 <AllProducts />
               </div>
             );
 
           case 'getPresentation':
             return (
-              <div
-                key={toolCallId}
-                className="w-full overflow-hidden rounded-lg p-2"
-              >
+              <div key={toolCallId} className="w-full overflow-hidden rounded-lg p-2">
                 <Presentation />
               </div>
             );
@@ -143,6 +134,13 @@ export default function ToolRenderer({
             return (
               <div key={toolCallId} className="w-full rounded-lg p-2">
                 <Experience />
+              </div>
+            );
+
+          case 'getAchievements':
+            return (
+              <div key={toolCallId} className="w-full rounded-lg p-2">
+                <Achievements data={parsedResult} />
               </div>
             );
 
@@ -193,13 +191,9 @@ export default function ToolRenderer({
               />
             );
 
-          // Default renderer for other tools
           default:
             return (
-              <div
-                key={toolCallId}
-                className="bg-secondary/10 w-full rounded-lg p-4"
-              >
+              <div key={toolCallId} className="bg-secondary/10 w-full rounded-lg p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="text-lg font-medium">{toolName}</h3>
                   <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-800 dark:bg-green-900 dark:text-green-100">
