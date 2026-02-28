@@ -11,6 +11,8 @@ import { SYSTEM_PROMPT } from './prompt';
 import { getContact } from './tools/getContact';
 import { getCrazy } from './tools/getCrazy';
 import { getExperience } from './tools/getExperience';
+import { getAchievements } from './tools/getAchievements';
+import { getCertifications } from './tools/getCertifications';
 import { getInternship } from './tools/getIntership';
 import { getMe } from './tools/getMe';
 import { getPresentation } from './tools/getPresentation';
@@ -220,6 +222,8 @@ export async function POST(req: Request) {
       getContact: createCachedTool(getContact, 'getContact'),
       getSkills: createCachedTool(getSkills, 'getSkills'),
       getExperience: createCachedTool(getExperience, 'getExperience'),
+      getAchievements: createCachedTool(getAchievements, 'getAchievements'),
+      getCertifications: createCachedTool(getCertifications, 'getCertifications'),
       getSports: createCachedTool(getSports, 'getSports'),
       getCrazy: createCachedTool(getCrazy, 'getCrazy'),
       getInternship: createCachedTool(getInternship, 'getInternship'),

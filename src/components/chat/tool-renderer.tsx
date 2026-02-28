@@ -6,12 +6,12 @@ import InternshipCard from '../InternshipCard';
 import Me from '../me';
 import { Presentation } from '../presentation';
 import AllProjects from '../projects/AllProjects';
-import AllProducts from '../projects/AllProducts';
 import RCB from '../rcb';
 import Resume from '../resume';
 import Skills from '../skills';
 import Sports from '../sport';
 import Achievements from '../achievements';
+import Certifications from '../certifications';
 import {
   Collapsible,
   CollapsibleContent,
@@ -20,7 +20,6 @@ import {
 import { ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { useState } from 'react';
 
-// Web Search Result Component
 const WebSearchResult = ({ result }: { result: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,14 +38,9 @@ const WebSearchResult = ({ result }: { result: string }) => {
           <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-900 dark:text-blue-100">
             Results
           </span>
-          {isOpen ? (
-            <ChevronUp className="h-4 w-4" />
-          ) : (
-            <ChevronDown className="h-4 w-4" />
-          )}
+          {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </div>
       </CollapsibleTrigger>
-
       <CollapsibleContent>
         <div className="border-t bg-background/50 p-4">
           <div className="prose dark:prose-invert max-w-none text-sm">
@@ -65,16 +59,11 @@ interface ToolRendererProps {
   messageId: string;
 }
 
-export default function ToolRenderer({
-  toolInvocations,
-  messageId,
-}: ToolRendererProps) {
+export default function ToolRenderer({ toolInvocations, messageId }: ToolRendererProps) {
   return (
     <div className="w-full transition-all duration-300">
       {toolInvocations.map((tool) => {
         const { toolCallId, toolName } = tool;
-
-        console.log(`Tool Name: ${toolName}`, tool);
 
         let parsedResult = null;
         try {
@@ -92,13 +81,6 @@ export default function ToolRenderer({
             return (
               <div key={toolCallId} className="w-full overflow-hidden rounded-lg p-2">
                 <AllProjects />
-              </div>
-            );
-
-          case 'getProducts':
-            return (
-              <div key={toolCallId} className="w-full overflow-hidden rounded-lg p-2">
-                <AllProducts />
               </div>
             );
 
@@ -144,6 +126,13 @@ export default function ToolRenderer({
               </div>
             );
 
+          case 'getCertifications':
+            return (
+              <div key={toolCallId} className="w-full rounded-lg p-2">
+                <Certifications data={parsedResult} />
+              </div>
+            );
+
           case 'getSports':
             return (
               <div key={toolCallId} className="w-full rounded-lg p-2">
@@ -183,11 +172,7 @@ export default function ToolRenderer({
             return (
               <WebSearchResult
                 key={toolCallId}
-                result={
-                  typeof tool.result === 'string'
-                    ? tool.result
-                    : JSON.stringify(tool.result, null, 2)
-                }
+                result={typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result, null, 2)}
               />
             );
 
