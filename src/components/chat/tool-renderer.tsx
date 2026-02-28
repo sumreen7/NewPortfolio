@@ -50,7 +50,7 @@ const WebSearchResult = ({ result }: { result: string }) => {
         <div className="border-t bg-background/50 p-4">
           <div className="prose dark:prose-invert max-w-none text-sm">
             <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed">
-              {result}
+              {typeof result === 'string' ? result : JSON.stringify(result, null, 2)}
             </pre>
           </div>
         </div>
@@ -74,19 +74,16 @@ export default function ToolRenderer({
         const { toolCallId, toolName } = tool;
 
         console.log(`Tool Name: ${toolName}`, tool);
+
         let parsedResult = null;
         try {
           if (tool.result && typeof tool.result === 'string') {
             parsedResult = JSON.parse(tool.result);
-          } else {
-            console.warn(`Tool result is not a valid JSON string:`, tool.result);
+          } else if (tool.result && typeof tool.result === 'object') {
+            parsedResult = tool.result;
           }
         } catch (error) {
           console.error(`Error parsing tool result for ${toolName}:`, error);
-        }
-
-        if (!parsedResult) {
-          console.error(`Invalid or empty tool result for ${toolName}:`, tool.result);
         }
 
         // Return specialized components based on tool name
@@ -186,7 +183,14 @@ export default function ToolRenderer({
 
           case 'getWebSearch':
             return (
-              <WebSearchResult key={toolCallId} result={tool.result || 'No results found.'} />
+              <WebSearchResult
+                key={toolCallId}
+                result={
+                  typeof tool.result === 'string'
+                    ? tool.result
+                    : JSON.stringify(tool.result, null, 2)
+                }
+              />
             );
 
           // Default renderer for other tools
